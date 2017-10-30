@@ -1,0 +1,56 @@
+\:host
+  position: absolute
+
+.drag-handle
+  width: 100px
+  height: 100px
+  background: rgba(255,255,255,.5)
+  border: 1px dotted #999
+  cursor: move
+  user-select: none
+
+.handle
+  width: 6px
+  height: 6px
+  background: red
+  position: absolute
+
+.left-handle
+  left: -3px
+  top: calc(50% - 3px)
+  cursor: w-resize
+
+.right-handle
+  right: -3px
+  top: calc(50% - 3px)
+  cursor: e-resize
+
+.top-handle
+  top: -3px
+  left: calc(50% - 3px)
+  cursor: n-resize
+
+.bottom-handle
+  bottom: -3px
+  left: calc(50% - 3px)
+  cursor: s-resize
+
+.top-left-handle
+  top: -3px
+  left: -3px
+  cursor: nw-resize
+
+.top-right-handle
+  top: -3px
+  right: -3px
+  cursor: ne-resize
+
+.bottom-left-handle
+  bottom: -3px
+  left: -3px
+  cursor: sw-resize
+
+.bottom-right-handle
+  bottom: -3px
+  right: -3px
+  cursor: se-resize

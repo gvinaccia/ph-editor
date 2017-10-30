@@ -1,0 +1,30 @@
+@import vars
+@import mixins
+
+$headerSize: 50px
+
+header, aside, footer
+  z-index: 100
+  background: $bg
+
+main
+  +fillParent
+  background: $mainBg
+  display: flex
+  justify-content: center
+  align-items: center
+
+header
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: $headerSize
+
+
+footer
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: $headerSize
