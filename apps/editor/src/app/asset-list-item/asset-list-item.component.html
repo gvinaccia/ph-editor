@@ -1,0 +1,9 @@
+<div class="row" draggable="true" (dragstart)="startDrag($event)">
+  <div class="thumbnail">
+    <img [src]="item.data" class="image">
+  </div>
+  <div class="col">
+    <span class="name">{{ item.name }}</span>
+    <span class="props">{{ item.width }} x {{ item.height }}</span>
+  </div>
+</div>

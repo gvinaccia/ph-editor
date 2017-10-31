@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sprite',
@@ -6,37 +6,41 @@ import {Component, ElementRef, OnInit} from '@angular/core';
   styleUrls: ['./sprite.component.sass']
 })
 export class SpriteComponent implements OnInit {
-
   private inDrag = false;
   private startCoords = null;
 
-  constructor(private el: ElementRef) {
-    console.log(el);
+  @Input() spriteDef;
+
+  constructor(private el: ElementRef) {}
+
+  ngOnInit() {
+    this.moveToPoint(this.spriteDef.x, this.spriteDef.y);
   }
 
-  ngOnInit() {}
+  get scaledWidth() {
+    return this.spriteDef.width * this.spriteDef.scale.x;
+  }
+
+  get scaledHeight() {
+    return this.spriteDef.width * this.spriteDef.scale.x;
+  }
 
   startDragging(event: MouseEvent) {
     this.inDrag = true;
     this.startCoords = {
       x: event.clientX,
-      y: event.clientY,
+      y: event.clientY
     };
-
-    console.log("start", this.startCoords);
   }
 
   stopDragging() {
     this.inDrag = false;
     this.startCoords = null;
-
-    console.log("stop");
   }
 
   drag(event: MouseEvent) {
-
-    if(!this.inDrag) {
-        return;
+    if (!this.inDrag) {
+      return;
     }
 
     const x = this.startCoords.x - event.clientX;
@@ -48,7 +52,24 @@ export class SpriteComponent implements OnInit {
     const newTop = this.el.nativeElement.offsetTop - y;
     const newLeft = this.el.nativeElement.offsetLeft - x;
 
-    this.el.nativeElement.style.top = `${newTop}px`;
-    this.el.nativeElement.style.left = `${newLeft}px`;
+    this.moveToPoint(newLeft, newTop);
+  }
+
+  private moveToPoint(x, y) {
+    this.el.nativeElement.style.top = `${y}px`;
+    this.el.nativeElement.style.left = `${x}px`;
+  }
+
+  handleKeys(event: KeyboardEvent) {
+    if (event.key === '-') {
+      this.spriteDef.scale.x -= .1;
+      this.spriteDef.scale.y -= .1;
+    }
+    if (event.key === '+') {
+      this.spriteDef.scale.x += .1;
+      this.spriteDef.scale.y += .1;
+    }
+
+    console.log(event);
   }
 }

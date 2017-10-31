@@ -1,0 +1,13 @@
+<div (dragenter)="onDragEnter($event)"
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)"
+     (dragover)="$event.preventDefault()"
+     class="dropzone"
+     [class.active]="isActive">
+  <div>
+    <h4>Immagini</h4>
+    <app-asset-list-item
+      *ngFor="let image of service.images"
+      [item]="image"></app-asset-list-item>
+  </div>
+</div>
