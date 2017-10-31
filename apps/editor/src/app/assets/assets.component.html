@@ -7,7 +7,7 @@
   <div>
     <h4>Immagini</h4>
     <app-asset-list-item
-      *ngFor="let image of service.images"
+      *ngFor="let image of service.images$ | async"
       [item]="image"></app-asset-list-item>
   </div>
 </div>

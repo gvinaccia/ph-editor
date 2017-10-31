@@ -29,7 +29,7 @@ export class AssetsComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
-      reader.addEventListener('load',  e => this.service.registerImage(file.name, (e.target as any).result));
+      reader.addEventListener('load', e => this.service.registerImage(file.name, (e.target as any).result));
       reader.readAsDataURL(file);
     }
 

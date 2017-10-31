@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-asset-list-item',
@@ -6,7 +6,6 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./asset-list-item.component.sass']
 })
 export class AssetListItemComponent implements OnInit {
-
   @Input() item;
 
   constructor() {}

@@ -1,4 +1,4 @@
 <div class="stage" (drop)="onDrop($event)" (dragover)="$event.preventDefault()">
-    <app-sprite *ngFor="let sprite of sprites" [spriteDef]="sprite"></app-sprite>
+  <app-sprite *ngFor="let sprite of sprites$ | async" [spriteDef]="sprite"></app-sprite>
 </div>
 

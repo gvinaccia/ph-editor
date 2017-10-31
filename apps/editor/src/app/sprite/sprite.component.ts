@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-sprite',
@@ -8,10 +9,11 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 export class SpriteComponent implements OnInit {
   private inDrag = false;
   private startCoords = null;
+  private coordsToDispatch = null;
 
   @Input() spriteDef;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.moveToPoint(this.spriteDef.x, this.spriteDef.y);
@@ -36,6 +38,17 @@ export class SpriteComponent implements OnInit {
   stopDragging() {
     this.inDrag = false;
     this.startCoords = null;
+    if (this.coordsToDispatch != null) {
+      this.store.dispatch({
+        type: 'STAGE.SPRITE_MOVE',
+        payload: {
+          sprite_id: this.spriteDef.id,
+          x: this.coordsToDispatch.x,
+          y: this.coordsToDispatch.y
+        }
+      });
+      this.coordsToDispatch = null;
+    }
   }
 
   drag(event: MouseEvent) {
@@ -53,6 +66,7 @@ export class SpriteComponent implements OnInit {
     const newLeft = this.el.nativeElement.offsetLeft - x;
 
     this.moveToPoint(newLeft, newTop);
+    this.coordsToDispatch = {x: newLeft,y: newTop};
   }
 
   private moveToPoint(x, y) {
@@ -62,12 +76,12 @@ export class SpriteComponent implements OnInit {
 
   handleKeys(event: KeyboardEvent) {
     if (event.key === '-') {
-      this.spriteDef.scale.x -= .1;
-      this.spriteDef.scale.y -= .1;
+      this.spriteDef.scale.x -= 0.1;
+      this.spriteDef.scale.y -= 0.1;
     }
     if (event.key === '+') {
-      this.spriteDef.scale.x += .1;
-      this.spriteDef.scale.y += .1;
+      this.spriteDef.scale.x += 0.1;
+      this.spriteDef.scale.y += 0.1;
     }
 
     console.log(event);

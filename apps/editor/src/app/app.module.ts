@@ -7,9 +7,14 @@ import { SpriteComponent } from './sprite/sprite.component';
 import { AssetsComponent } from './assets/assets.component';
 import { AssetsService } from './assets.service';
 import { AssetListItemComponent } from './asset-list-item/asset-list-item.component';
+import {StoreModule} from "./store/store.module";
 
 @NgModule({
-  imports: [BrowserModule, NxModule.forRoot()],
+  imports: [
+    BrowserModule,
+    NxModule.forRoot(),
+    StoreModule
+  ],
   declarations: [AppComponent, StageComponent, SpriteComponent, AssetsComponent, AssetListItemComponent],
   bootstrap: [AppComponent],
   providers: [AssetsService]
