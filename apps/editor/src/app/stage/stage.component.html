@@ -1,6 +1,7 @@
 <div class="stage" (drop)="onDrop($event)" (dragover)="$event.preventDefault()">
   <app-sprite *ngFor="let sprite of sprites$ | async"
               [spriteDef]="sprite"
+              [isSelected]="(selectedSpriteId$ | async) == sprite.id"
               [class.is-selected]="(selectedSpriteId$ | async) == sprite.id"></app-sprite>
 </div>
 

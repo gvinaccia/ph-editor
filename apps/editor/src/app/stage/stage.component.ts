@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs/Observable";
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-stage',
@@ -8,10 +8,9 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./stage.component.sass']
 })
 export class StageComponent implements OnInit {
-
   sprites$: Observable<ISprite[]>;
 
-  selectedSpriteId$: Observable<number|string>;
+  selectedSpriteId$: Observable<number | string>;
 
   constructor(private store: Store<AppState>) {
     this.sprites$ = store.select('sprites');
@@ -23,8 +22,12 @@ export class StageComponent implements OnInit {
   onDrop(event: DragEvent) {
     const obj = JSON.parse(event.dataTransfer.getData('application/json'));
 
+    const arr = new Uint32Array(1);
+
+    window.crypto.getRandomValues(arr);
+
     const sprite: ISprite = {
-      id: Math.floor(Math.random() * 1000),
+      id: arr[0],
       width: obj.width,
       height: obj.height,
       x: 0,
@@ -34,14 +37,12 @@ export class StageComponent implements OnInit {
       scale: {
         x: 1,
         y: 1
-      },
-      isSelected: true
+      }
     };
 
     this.store.dispatch({
       type: 'STAGE.ADD_SPRITE',
       payload: sprite
     });
-
   }
 }

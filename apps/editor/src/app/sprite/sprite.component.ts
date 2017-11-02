@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import {Store} from "@ngrx/store";
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sprite',
@@ -12,6 +12,8 @@ export class SpriteComponent implements OnInit {
   private coordsToDispatch = null;
 
   @Input() spriteDef: ISprite;
+
+  @Input() isSelected = false;
 
   constructor(private el: ElementRef, private store: Store<AppState>) {}
 
@@ -66,7 +68,7 @@ export class SpriteComponent implements OnInit {
     const newLeft = this.el.nativeElement.offsetLeft - x;
 
     this.moveToPoint(newLeft, newTop);
-    this.coordsToDispatch = {x: newLeft,y: newTop};
+    this.coordsToDispatch = { x: newLeft, y: newTop };
   }
 
   private moveToPoint(x, y) {
@@ -76,15 +78,29 @@ export class SpriteComponent implements OnInit {
 
   handleKeys(event: KeyboardEvent) {
     if (event.key === '-') {
-      this.spriteDef.scale.x -= 0.1;
-      this.spriteDef.scale.y -= 0.1;
+      this.store.dispatch({
+        type: 'STAGE.SPRITE_SCALE',
+        payload: {
+          sprite_id: this.spriteDef.id,
+          scale: {
+            x: this.spriteDef.scale.x - 0.1,
+            y: this.spriteDef.scale.y - 0.1,
+          }
+        }
+      });
     }
     if (event.key === '+') {
-      this.spriteDef.scale.x += 0.1;
-      this.spriteDef.scale.y += 0.1;
+      this.store.dispatch({
+        type: 'STAGE.SPRITE_SCALE',
+        payload: {
+          sprite_id: this.spriteDef.id,
+          scale: {
+            x: this.spriteDef.scale.x + 0.1,
+            y: this.spriteDef.scale.y + 0.1,
+          }
+        }
+      });
     }
-
-    console.log(event);
   }
 
   markSelected() {

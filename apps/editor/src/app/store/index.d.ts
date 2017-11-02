@@ -12,14 +12,11 @@ declare interface ISprite {
   src: string;
   sprite_id: string;
   scale: IVector;
-
-  // solo per l'interfaccia
-  isSelected: boolean;
 }
 
 declare interface AppState {
   assets: {
-    images: any[]
+    images: any[];
   };
   sprites: ISprite[];
   stage: {

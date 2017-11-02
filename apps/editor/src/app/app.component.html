@@ -2,8 +2,9 @@
 <section>
   <aside>
     <app-assets></app-assets>
+    <app-sprite-properties *ngIf="selectedSprite" [sprite]="selectedSprite"></app-sprite-properties>
   </aside>
-  <main>
+  <main (keyup)="handleShortcuts($event)" tabindex="0">
     <app-stage></app-stage>
   </main>
 </section>
