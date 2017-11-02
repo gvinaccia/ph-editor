@@ -9,10 +9,13 @@ import {Observable} from "rxjs/Observable";
 })
 export class StageComponent implements OnInit {
 
-  sprites$: Observable<any>;
+  sprites$: Observable<ISprite[]>;
+
+  selectedSpriteId$: Observable<number|string>;
 
   constructor(private store: Store<AppState>) {
     this.sprites$ = store.select('sprites');
+    this.selectedSpriteId$ = store.select('stage', 'activeSpriteId');
   }
 
   ngOnInit() {}
@@ -20,7 +23,7 @@ export class StageComponent implements OnInit {
   onDrop(event: DragEvent) {
     const obj = JSON.parse(event.dataTransfer.getData('application/json'));
 
-    const sprite = {
+    const sprite: ISprite = {
       id: Math.floor(Math.random() * 1000),
       width: obj.width,
       height: obj.height,
@@ -31,7 +34,8 @@ export class StageComponent implements OnInit {
       scale: {
         x: 1,
         y: 1
-      }
+      },
+      isSelected: true
     };
 
     this.store.dispatch({

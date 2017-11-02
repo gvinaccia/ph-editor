@@ -11,7 +11,7 @@ export class SpriteComponent implements OnInit {
   private startCoords = null;
   private coordsToDispatch = null;
 
-  @Input() spriteDef;
+  @Input() spriteDef: ISprite;
 
   constructor(private el: ElementRef, private store: Store<AppState>) {}
 
@@ -24,7 +24,7 @@ export class SpriteComponent implements OnInit {
   }
 
   get scaledHeight() {
-    return this.spriteDef.width * this.spriteDef.scale.x;
+    return this.spriteDef.height * this.spriteDef.scale.y;
   }
 
   startDragging(event: MouseEvent) {
@@ -85,5 +85,12 @@ export class SpriteComponent implements OnInit {
     }
 
     console.log(event);
+  }
+
+  markSelected() {
+    this.store.dispatch({
+      type: 'STAGE.SELECT_SPRITE',
+      payload: { sprite_id: this.spriteDef.id }
+    });
   }
 }

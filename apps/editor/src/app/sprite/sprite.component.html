@@ -3,10 +3,12 @@
      (mouseup)="stopDragging($event)"
      (mouseout)="stopDragging($event)"
      (keyup)="handleKeys($event)"
+     (click)="markSelected()"
      class="drag-handle">
   <img [src]="spriteDef.src"
-       [style.width]="spriteDef.scaledWidth + 'px'"
-       [style.height]="spriteDef.scaledHeight + 'px'">
+       [style.width]="scaledWidth + 'px'"
+       [style.height]="scaledHeight + 'px'"
+       >
 </div>
 <span class="handle left-handle"></span>
 <span class="handle right-handle"></span>

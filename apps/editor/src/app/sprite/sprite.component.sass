@@ -1,14 +1,21 @@
 \:host
   position: absolute
+  z-index: 1
 
 .drag-handle
-  background: rgba(255,255,255,.5)
-  border: 1px dotted #999
-  cursor: move
   user-select: none
 
 img
   pointer-events: none
+
+\:host.is-selected
+  z-index: 100
+  .handle
+    visibility: visible
+  .drag-handle
+    background: rgba(255,255,255,.5)
+    border: 1px dotted #999
+    cursor: move
 
 .handle
   width: 6px
@@ -16,6 +23,7 @@ img
   background: #111111
   position: absolute
   border-radius: 50%
+  visibility: hidden
 
 .left-handle
   left: -3px
