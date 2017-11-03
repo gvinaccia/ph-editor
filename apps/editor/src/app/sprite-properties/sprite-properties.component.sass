@@ -1,0 +1,17 @@
+@import ../_vars
+
+$border-color: lighten($bg, 15%)
+
+.prop
+  display: flex
+  border-bottom: 1px solid $border-color
+  border-top: 1px solid $border-color
+
+.propName
+  width: 40%
+
+.propValue
+  flex: 1
+  overflow: hidden
+  text-align: right
+  background: lighten($bg, 30%)

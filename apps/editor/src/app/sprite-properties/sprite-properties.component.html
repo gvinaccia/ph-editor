@@ -1,5 +1,5 @@
-<ul>
-  <li *ngFor="let prop of props">
-    {{ prop.key }}: {{ prop.val }}
-  </li>
-</ul>
+<div>
+  <div *ngFor="let prop of props" class="prop">
+    <span class="propName">{{ prop.key }}</span><span class="propValue">{{ prop.val }}</span>
+  </div>
+</div>
