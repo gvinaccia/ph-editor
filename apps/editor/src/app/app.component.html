@@ -1,11 +1,23 @@
 <header></header>
 <section>
   <aside>
+
     <app-assets></app-assets>
-    <app-sprite-properties *ngIf="selectedSprite" [sprite]="selectedSprite"></app-sprite-properties>
+
+    <div class="spacer"></div>
+
+    <app-sprite-properties *ngIf="selectedSprite"
+                           [sprite]="selectedSprite"></app-sprite-properties>
+
   </aside>
+
   <main (keyup)="handleShortcuts($event)" tabindex="0">
     <app-stage></app-stage>
   </main>
+
+  <aside>
+    <app-layer-tree></app-layer-tree>
+  </aside>
+
 </section>
 <!-- <footer></footer> -->

@@ -9,6 +9,7 @@ import { AssetsService } from './assets.service';
 import { AssetListItemComponent } from './asset-list-item/asset-list-item.component';
 import { StoreModule } from './store/store.module';
 import { SpritePropertiesComponent } from './sprite-properties/sprite-properties.component';
+import { LayerTreeComponent } from './layer-tree/layer-tree.component';
 
 @NgModule({
   imports: [BrowserModule, NxModule.forRoot(), StoreModule],
@@ -18,7 +19,8 @@ import { SpritePropertiesComponent } from './sprite-properties/sprite-properties
     SpriteComponent,
     AssetsComponent,
     AssetListItemComponent,
-    SpritePropertiesComponent
+    SpritePropertiesComponent,
+    LayerTreeComponent
   ],
   bootstrap: [AppComponent],
   providers: [AssetsService]
