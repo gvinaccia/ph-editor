@@ -12,6 +12,7 @@ declare interface ISprite {
   src: string;
   sprite_id: string;
   scale: IVector;
+  anchor: IVector;
 }
 
 declare interface AppState {

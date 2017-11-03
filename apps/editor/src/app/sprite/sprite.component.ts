@@ -76,33 +76,6 @@ export class SpriteComponent implements OnInit {
     this.el.nativeElement.style.left = `${x}px`;
   }
 
-  handleKeys(event: KeyboardEvent) {
-    if (event.key === '-') {
-      this.store.dispatch({
-        type: 'STAGE.SPRITE_SCALE',
-        payload: {
-          sprite_id: this.spriteDef.id,
-          scale: {
-            x: this.spriteDef.scale.x - 0.1,
-            y: this.spriteDef.scale.y - 0.1,
-          }
-        }
-      });
-    }
-    if (event.key === '+') {
-      this.store.dispatch({
-        type: 'STAGE.SPRITE_SCALE',
-        payload: {
-          sprite_id: this.spriteDef.id,
-          scale: {
-            x: this.spriteDef.scale.x + 0.1,
-            y: this.spriteDef.scale.y + 0.1,
-          }
-        }
-      });
-    }
-  }
-
   markSelected() {
     this.store.dispatch({
       type: 'STAGE.SELECT_SPRITE',

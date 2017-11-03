@@ -25,7 +25,13 @@ export function spritesReducer(state = [], action) {
       return updateSpriteInIndex(
         payload.sprite_id,
         state,
-        sprite => ({ ...sprite, scale: payload.scale })
+        sprite => {
+          const scale = {
+            x: sprite.scale.x + payload.deltaX,
+            y: sprite.scale.y + payload.deltaY,
+          };
+          return { ...sprite, scale };
+        }
       );
     default:
       return state;

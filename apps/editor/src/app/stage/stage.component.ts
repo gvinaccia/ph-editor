@@ -37,6 +37,10 @@ export class StageComponent implements OnInit {
       scale: {
         x: 1,
         y: 1
+      },
+      anchor: {
+        x: 0,
+        y: 0
       }
     };
 

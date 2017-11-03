@@ -26,6 +26,32 @@ export class AppComponent implements OnInit {
       case "Escape":
         this.store.dispatch({type: 'STAGE.UNSELECT_ALL'});
         break;
+      case "-":
+        if (this.selectedSprite == null) {
+          return;
+        }
+        this.store.dispatch({
+          type: 'STAGE.SPRITE_SCALE',
+          payload: {
+            sprite_id: this.selectedSprite.id,
+            deltaX: -0.05,
+            deltaY: -0.05
+          }
+        });
+        break;
+      case "+":
+        if (this.selectedSprite == null) {
+          return;
+        }
+        this.store.dispatch({
+          type: 'STAGE.SPRITE_SCALE',
+          payload: {
+            sprite_id: this.selectedSprite.id,
+            deltaX: 0.05,
+            deltaY: 0.05
+          }
+        });
+        break;
       default:
     }
   }

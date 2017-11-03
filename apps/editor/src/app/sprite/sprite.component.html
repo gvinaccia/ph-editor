@@ -2,10 +2,8 @@
      (mousemove)="drag($event)"
      (mouseup)="stopDragging($event)"
      (mouseout)="stopDragging($event)"
-     (keyup)="handleKeys($event)"
      (click)="markSelected()"
-     class="drag-handle"
-     tabindex="0">
+     class="drag-handle">
   <img [src]="spriteDef.src"
        [style.width]="scaledWidth + 'px'"
        [style.height]="scaledHeight + 'px'">
