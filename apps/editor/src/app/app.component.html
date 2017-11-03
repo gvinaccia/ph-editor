@@ -20,4 +20,12 @@
   </aside>
 
 </section>
-<!-- <footer></footer> -->
+<footer>
+  <div class="left"></div>
+  <div class="right">
+    <span>{{ stage.width }}x{{ stage.height }}</span>
+    <button (click)="stageActions.zoomOut()">-</button>
+    <span>{{ stage.zoom }}</span>
+    <button (click)="stageActions.zoomIn()">+</button>
+  </div>
+</footer>

@@ -6,6 +6,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { assetsReducer } from './reducers/assets';
 import { spritesReducer } from './reducers/sprites';
 import { stageReducer } from './reducers/stage';
+import {StageActions} from "./actions";
 
 import 'rxjs/add/operator/filter';
 
@@ -21,7 +22,14 @@ const reducers = {
 };
 
 @NgModule({
-  imports: [CommonModule, NGRXStoreModule.forRoot(reducers, { metaReducers }), StoreDevtoolsModule.instrument()],
-  declarations: []
+  imports: [
+    CommonModule,
+    NGRXStoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument()
+  ],
+  declarations: [],
+  providers: [
+    StageActions
+  ]
 })
 export class StoreModule {}

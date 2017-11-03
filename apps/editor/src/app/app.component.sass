@@ -2,6 +2,7 @@
 @import mixins
 
 $headerSize: 50px
+$footerSize: 24px
 
 \:host
   display: flex
@@ -19,13 +20,21 @@ main
   align-items: center
   overflow: auto
 
+  &:focus
+    outline: none
+
 header
   height: $headerSize
   box-shadow: 0 3px 7px #000
   z-index: 100
 
 footer
-  height: $headerSize
+  height: $footerSize
+  z-index: 100
+  box-shadow: 0 -1px 3px #000
+  display: flex
+  justify-content: space-between
+  align-items: center
 
 aside
   width: 200px

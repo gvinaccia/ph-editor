@@ -22,5 +22,8 @@ declare interface AppState {
   sprites: ISprite[];
   stage: {
     activeSpriteId: number | string;
+    width: number;
+    height: number;
+    zoom: 1;
   };
 }

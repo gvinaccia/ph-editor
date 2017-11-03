@@ -1,6 +1,6 @@
 <h4>sprites</h4>
 <ul>
-  <li *ngFor="let sprite of sprites$ | async">
+  <li *ngFor="let sprite of sprites$ | async" [class.active]="(activeSpriteId$ | async) === sprite.id">
     {{ sprite.id }}
   </li>
 </ul>

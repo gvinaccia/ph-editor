@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import {StageActions} from "./store/actions";
 
 @Component({
   selector: 'app-root',
@@ -8,55 +9,50 @@ import { Store } from '@ngrx/store';
 })
 export class AppComponent implements OnInit {
   selectedSprite: ISprite;
+  stage: any;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, public stageActions: StageActions) {}
 
   ngOnInit() {
     this.store.subscribe(state => {
       if (state.stage.activeSpriteId !== null) {
         this.selectedSprite = state.sprites.filter(sp => sp.id === state.stage.activeSpriteId)[0];
       }
+      this.stage = { ...state.stage };
     });
   }
 
   handleShortcuts(event: KeyboardEvent) {
     switch (event.key) {
       case 'Escape':
-        this.store.dispatch({ type: 'STAGE.UNSELECT_ALL' });
+        this.stageActions.unselectAll();
         break;
       case '-':
-        if (this.selectedSprite == null) {
-          return;
-        }
-        this.store.dispatch({
-          type: 'STAGE.SPRITE_SCALE',
-          payload: {
-            sprite_id: this.selectedSprite.id,
-            deltaX: -0.05,
-            deltaY: -0.05
-          }
-        });
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.scaleSprite(this.selectedSprite, -0.05);
         break;
       case '+':
-        if (this.selectedSprite == null) {
-          return;
-        }
-        this.store.dispatch({
-          type: 'STAGE.SPRITE_SCALE',
-          payload: {
-            sprite_id: this.selectedSprite.id,
-            deltaX: 0.05,
-            deltaY: 0.05
-          }
-        });
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.scaleSprite(this.selectedSprite, 0.05);
         break;
       case 'Delete':
-        this.store.dispatch({
-          type: 'STAGE.REMOVE_SPRITE',
-          payload: {
-            sprite_id: this.selectedSprite.id
-          }
-        });
+        this.stageActions.removeSprite(this.selectedSprite);
+        break;
+      case 'ArrowLeft':
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.moveSpriteDelta(this.selectedSprite, {x: -1, y: 0});
+        break;
+      case 'ArrowRight':
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.moveSpriteDelta(this.selectedSprite, {x: 1, y: 0});
+        break;
+      case 'ArrowDown':
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.moveSpriteDelta(this.selectedSprite, {x: 0, y: 1});
+        break;
+      case 'ArrowUp':
+        if (this.selectedSprite == null) { return; }
+        this.stageActions.moveSpriteDelta(this.selectedSprite, {x: 0, y: -1});
         break;
       default:
     }

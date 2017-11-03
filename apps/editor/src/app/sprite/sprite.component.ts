@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {StageActions} from "../store/actions";
 
 @Component({
   selector: 'app-sprite',
   templateUrl: './sprite.component.html',
-  styleUrls: ['./sprite.component.sass']
+  styleUrls: ['./sprite.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpriteComponent implements OnInit {
   private inDrag = false;
@@ -15,7 +16,10 @@ export class SpriteComponent implements OnInit {
 
   @Input() isSelected = false;
 
-  constructor(private el: ElementRef, private store: Store<AppState>) {}
+  constructor(
+    private el: ElementRef,
+    private actions: StageActions
+  ) {}
 
   ngOnInit() {
     this.moveToPoint(this.spriteDef.x, this.spriteDef.y);
@@ -41,14 +45,7 @@ export class SpriteComponent implements OnInit {
     this.inDrag = false;
     this.startCoords = null;
     if (this.coordsToDispatch != null) {
-      this.store.dispatch({
-        type: 'STAGE.SPRITE_MOVE',
-        payload: {
-          sprite_id: this.spriteDef.id,
-          x: this.coordsToDispatch.x,
-          y: this.coordsToDispatch.y
-        }
-      });
+      this.actions.moveSprite(this.spriteDef, this.coordsToDispatch);
       this.coordsToDispatch = null;
     }
   }
@@ -77,9 +74,6 @@ export class SpriteComponent implements OnInit {
   }
 
   markSelected() {
-    this.store.dispatch({
-      type: 'STAGE.SELECT_SPRITE',
-      payload: { sprite_id: this.spriteDef.id }
-    });
+    this.actions.select(this.spriteDef);
   }
 }

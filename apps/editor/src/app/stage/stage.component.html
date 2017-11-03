@@ -1,4 +1,10 @@
-<div class="stage" (drop)="onDrop($event)" (dragover)="$event.preventDefault()">
+<div class="stage"
+     (drop)="onDrop($event)"
+     (dragover)="$event.preventDefault()"
+     (click)="handleEmptyClick($event)"
+     [style.width]="(width$ | async) + 'px'"
+     [style.height]="(height$ | async) + 'px'"
+     [style.transform]="'scale(' + (zoom$ | async) + ')'">
   <app-sprite *ngFor="let sprite of sprites$ | async"
               [spriteDef]="sprite"
               [isSelected]="(selectedSpriteId$ | async) == sprite.id"

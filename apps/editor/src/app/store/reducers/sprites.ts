@@ -1,3 +1,5 @@
+import {StageActions} from "../actions/stage-actions";
+
 function updateSpriteInIndex(idToFind: number | string, sprites: ISprite[], cb: (ISprite) => ISprite) {
   const index = sprites.findIndex(sp => sp.id === idToFind);
   const updatedSprite = cb(sprites[index]);
@@ -9,11 +11,11 @@ export function spritesReducer(state: ISprite[] = [], action) {
   const { type, payload } = action;
 
   switch (type) {
-    case 'STAGE.ADD_SPRITE':
+    case StageActions.ADD_SPRITE:
       return [...state, payload];
-    case 'STAGE.REMOVE_SPRITE':
+    case StageActions.REMOVE_SPRITE:
       const index = state.findIndex(sp => sp.id === payload.sprite_id);
-      return [...state.slice(0, index), ...state.slice(index+1)];
+      return [...state.slice(0, index), ...state.slice(index + 1)];
     case 'STAGE.SPRITE_MOVE':
       return updateSpriteInIndex(payload.sprite_id, state, sprite => ({ ...sprite, x: payload.x, y: payload.y }));
     case 'STAGE.SPRITE_SCALE':
