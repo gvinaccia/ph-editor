@@ -9,8 +9,10 @@ export class StageActions {
   static readonly ADD_SPRITE = 'STAGE.ADD_SPRITE';
   static readonly REMOVE_SPRITE = 'STAGE.REMOVE_SPRITE';
   static readonly SCALE_SPRITE = 'STAGE.SPRITE_SCALE';
-
+  static readonly PULL_SPRITE_UP = 'STAGE.SPRITE_PULLUP';
+  static readonly PUSH_SPRITE_DOWN = 'STAGE.SPRITE_PUSHDOWN';
   static readonly ZOOM = 'STAGE.ZOOM';
+  static readonly MOVE_SPRITE = 'STAGE.SPRITE_MOVE';
 
   constructor(private store: Store<AppState>) { }
 
@@ -56,7 +58,7 @@ export class StageActions {
 
   moveSprite(sprite: ISprite, newposition: IVector) {
     this.store.dispatch({
-      type: 'STAGE.SPRITE_MOVE',
+      type: StageActions.MOVE_SPRITE,
       payload: {
         sprite_id: sprite.id,
         x: newposition.x,
@@ -67,7 +69,7 @@ export class StageActions {
 
   moveSpriteDelta(sprite: ISprite, delta: IVector) {
     this.store.dispatch({
-      type: 'STAGE.SPRITE_MOVE',
+      type: StageActions.MOVE_SPRITE,
       payload: {
         sprite_id: sprite.id,
         x: sprite.x + delta.x,
@@ -87,6 +89,20 @@ export class StageActions {
     this.store.dispatch({
       type: StageActions.ZOOM,
       payload: { zoom: -0.1 }
+    });
+  }
+
+  pullup(sprite: ISprite) {
+    this.store.dispatch({
+      type: StageActions.PULL_SPRITE_UP,
+      payload: { sprite_id: sprite.id }
+    });
+  }
+
+  pushdown(sprite: ISprite) {
+    this.store.dispatch({
+      type: StageActions.PUSH_SPRITE_DOWN,
+      payload: { sprite_id: sprite.id }
     });
   }
 

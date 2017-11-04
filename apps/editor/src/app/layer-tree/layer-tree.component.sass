@@ -1,2 +1,25 @@
 .active
-  color: red
+  .layer-item__name
+    color: red
+
+.layer-item
+  padding: .3em .5em
+  display: flex
+
+.layer-item__icon
+  width: 1em
+  margin-right: .5em
+
+.layer-item__name
+  flex: 1
+  cursor: pointer
+
+button
+  border: none
+  background: transparent
+  cursor: pointer
+  color: inherit
+  width: 1.2em
+
+  &:active, &:focus, &:focus:active
+    outline: none

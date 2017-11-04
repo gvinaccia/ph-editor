@@ -1,6 +1,20 @@
 <h4>sprites</h4>
-<ul>
-  <li *ngFor="let sprite of sprites$ | async" [class.active]="(activeSpriteId$ | async) === sprite.id">
+
+<div *ngFor="let sprite of sprites$ | async"
+     [class.active]="(activeSpriteId$ | async) === sprite.id"
+     class="layer-item">
+  <span class="layer-item__icon">
+    <i class="fa fa-file-image-o"></i>
+  </span>
+  <span class="layer-item__name" (click)="actions.select(sprite)">
     {{ sprite.id }}
-  </li>
-</ul>
+  </span>
+  <div class="layer-item__actions">
+    <button (click)="actions.pullup(sprite)">
+      <i class="fa fa-arrow-up"></i>
+    </button>
+    <button (click)="actions.pushdown(sprite)">
+      <i class="fa fa-arrow-down"></i>
+    </button>
+  </div>
+</div>
